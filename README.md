@@ -1,121 +1,102 @@
-# Modern Booking System
+# Bilalli Blendz
 
-A modern booking system built with Next.js, featuring Google Calendar integration and a beautiful UI.
-
-## Features
-
-- 📅 Date and time slot selection
-- 📧 Email notifications
-- 🔄 Google Calendar integration
-- 👤 Admin dashboard
-- 🎨 Modern UI with animations
-- 📱 Responsive design
+A modern booking website for Bilalli Blendz hair salon.
 
 ## Tech Stack
 
-### Frontend
-- Next.js (React framework)
-- Tailwind CSS (styling)
-- React Date Picker
-- Framer Motion (animations)
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS, Framer Motion
+- **Backend**: Supabase (PostgreSQL, Authentication, Storage)
+- **Deployment**: Vercel (Frontend), Supabase (Backend)
 
-### Backend
-- Next.js API Routes
-- Google Calendar API
-- Supabase (database)
+## Getting Started
 
-## Prerequisites
+### Prerequisites
 
-- Node.js 18+ installed
-- Google Cloud Project with Calendar API enabled
-- Supabase account
+- Node.js 18+ and npm
+- Supabase CLI (optional, for local development)
 
-## Setup
+### Installation
 
 1. Clone the repository:
-```bash
-git clone <repository-url>
-cd <repository-name>
-```
+   ```bash
+   git clone https://github.com/TezakiNakamoto/bilalli_blendz.git
+   cd bilalli_blendz
+   ```
 
 2. Install dependencies:
-```bash
-# Install frontend dependencies
-cd frontend
-npm install
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-# Install backend dependencies
-cd ../backend
-npm install
-```
+3. Create a `.env.local` file in the frontend directory with the following variables:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://lwwjovwktovzisfijkzw.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx3d2pvdndrdG92emlzZmlqa3p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUxOTIxNDgsImV4cCI6MjA2MDc2ODE0OH0.TTzFIROR7JFPSEDzt_LWlr_mHvWSu4ICmYBB2lIML9c
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   ```
 
-3. Set up environment variables:
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-Create `.env` files in both frontend and backend directories:
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Frontend (.env):
-```
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-NEXT_PUBLIC_API_URL=http://localhost:3001
-```
+## Deployment
 
-Backend (.env):
-```
-PORT=3001
-GOOGLE_CLIENT_ID=your_client_id
-GOOGLE_CLIENT_SECRET=your_client_secret
-GOOGLE_REDIRECT_URI=http://localhost:3001/auth/google/callback
-```
+### Deploying to Vercel
 
-4. Set up Google Calendar API:
-- Create a project in Google Cloud Console
-- Enable the Google Calendar API
-- Create OAuth 2.0 credentials
-- Download the credentials and save as `credentials.json` in the backend directory
+1. Push your code to GitHub.
+2. Go to [Vercel](https://vercel.com) and sign in with your GitHub account.
+3. Click "Add New Project" and import your repository.
+4. Configure the project:
+   - Framework Preset: Next.js
+   - Root Directory: `frontend`
+   - Build Command: `next build`
+   - Output Directory: `.next`
+5. Add the following environment variables:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://lwwjovwktovzisfijkzw.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx3d2pvdndrdG92emlzZmlqa3p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUxOTIxNDgsImV4cCI6MjA2MDc2ODE0OH0.TTzFIROR7JFPSEDzt_LWlr_mHvWSu4ICmYBB2lIML9c
+   NEXT_PUBLIC_SITE_URL=https://bilalli-blendz.vercel.app
+   ```
+6. Click "Deploy".
 
-5. Start the development servers:
+### Setting Up Supabase
 
-```bash
-# Start backend server
-cd backend
-npm run dev
+1. Go to [Supabase](https://supabase.com) and sign in with your GitHub account.
+2. Create a new project or use an existing one.
+3. Go to Project Settings > API and copy your project URL and anon key.
+4. Update your `.env.local` file with these values.
+5. Go to Authentication > URL Configuration and add your Vercel deployment URL.
+6. Go to Storage and create a new bucket named `bilalli-images`.
+7. Set the bucket to public access.
 
-# Start frontend server (in a new terminal)
-cd frontend
-npm run dev
-```
+### Uploading Images to Supabase
 
-The application will be available at:
-- Frontend: http://localhost:3000
-- Backend: http://localhost:3001
+1. Place your images in the appropriate folders in `frontend/public/images/`.
+2. Run the upload script:
+   ```bash
+   node scripts/upload-images.js
+   ```
 
-## Project Structure
+## Database Schema
 
-```
-.
-├── frontend/                 # Next.js frontend application
-│   ├── src/
-│   │   ├── app/             # Next.js app directory
-│   │   ├── components/      # React components
-│   │   └── styles/          # CSS styles
-│   └── public/              # Static files
-│
-└── backend/                 # Express backend application
-    ├── src/
-    │   ├── routes/          # API routes
-    │   ├── controllers/     # Route controllers
-    │   └── services/        # Business logic
-    └── credentials.json     # Google Calendar credentials
-```
+The project uses the following tables:
 
-## Contributing
+- **appointments**: Stores appointment bookings
+- **reviews**: Stores customer reviews
+- **services**: Stores available services
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## Features
+
+- Modern, responsive design
+- Online booking system
+- Customer reviews
+- Service catalog
+- Contact form
+- Social media integration
 
 ## License
 
