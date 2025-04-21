@@ -5,11 +5,12 @@ const nextConfig = {
     domains: [
       'images.unsplash.com',
       'localhost',
-      'bilalli-blendz.vercel.app'
+      'bilalli-blendz.vercel.app',
+      'lwwjovwktovzisfijkzw.supabase.co'
     ],
   },
-  // Enable static exports for better performance
-  output: 'standalone',
+  // Remove standalone output for Vercel deployment
+  // output: 'standalone',
 }
 
 module.exports = nextConfig 
